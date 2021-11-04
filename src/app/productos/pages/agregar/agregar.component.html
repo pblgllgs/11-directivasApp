@@ -3,7 +3,7 @@
 <h1 class="mt-5">Agregar producto</h1>
 <hr>
 
-<form (ngSubmit)="guardar()" autocomplete="off" [formGroup]="miFormulario">
+<form autocomplete="off" [formGroup]="miFormulario">
     <div class="row g-3 align-items-center mb-3">
         <div class="col-auto">
             <label class="col-form-label">
@@ -16,10 +16,10 @@
         </div>
 
         <div class="col-auto">
-            <span   class="form-text"
-                    error-msg
-                    *ngIf="tieneError('nombre')">
-                Este campo es quererido
+            <span   error-msg
+                    [mensaje]="texto1"
+                    [color]="color"
+                    [valido]="!tieneError('nombre')">
             </span>
         </div>
 
@@ -27,8 +27,14 @@
 
     <div class="row mt-5">
         <div class="col">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary"
+                    (click)="cambiarNombre()">
                 Cambiar
+            </button>
+
+            <button class="btn btn-primary"
+                    (click)="cambiarColor()">
+                Cambiar Color
             </button>
         </div>
     </div>
@@ -37,11 +43,18 @@
 <h3 class="mt-5">Formulario</h3>
 
 <div class="col">
-
     <span>value</span>
     <pre>{{miFormulario.value | json}}</pre>
 
     <span>Valid</span>
     <pre>{{miFormulario.valid}}</pre>
+</div>
 
+<div    class="row mt-5"
+        *customIf="miFormulario.valid">
+    <div class="col">
+        <div class="alert alert-primary">
+            Todo Ok!!
+        </div>
+    </div>
 </div>
